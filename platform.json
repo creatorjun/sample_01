@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "kind": "vite",
+  "spa": false,
+  "node_major": 22,
+  "public_env": []
+}

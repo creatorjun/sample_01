@@ -1,5 +1,22 @@
 # Template_01 — 포트폴리오 사이트 커스터마이징 가이드
 
+QTLAB의 **샘플 01** 운영 원본 저장소입니다.
+
+- 원본 저장소: [creatorjun/sample_01](https://github.com/creatorjun/sample_01)
+- 샘플 페이지: [qtlab.kr/sample_01](https://qtlab.kr/sample_01)
+- 실제 정적 사이트: [sample-01.qtlab.kr](https://sample-01.qtlab.kr/)
+- 기술 구성: React 18, Vite 4, Tailwind CSS 3
+- 실행 환경: Node.js 22.12 이상, npm 및 저장소에 포함된 `package-lock.json`
+
+```bash
+npm ci --no-audit --no-fund
+npm run dev
+```
+
+배포용 정적 파일은 `npm run build`로 `dist/`에 생성합니다. `npm run preview`로 결과를 확인할 수 있습니다. `platform.json`은 QTLAB 소스 빌드 계약을 선언합니다. GitHub로 푸시하는 동작은 운영 사이트를 자동으로 재배포하지 않습니다. 새 설치와 빌드는 Node.js 24.19.0 / npm 10.9.2에서 확인했습니다.
+
+소스에는 실제 서버 비밀값·인증키가 필요하지 않습니다. `node_modules/`, `dist/`, `artifacts/`, `.env*`, `.npmrc` 및 로컬 자격증명은 Git에서 제외합니다. 폰트는 기존 화면과 동일하게 Google Fonts와 Fontshare의 외부 CSS를 사용하므로 첫 접속 시 네트워크 연결이 필요합니다. 프로필과 프로젝트 링크는 `src/config.js`의 샘플 정보입니다.
+
 React + Vite + Tailwind CSS 기반의 개발자 포트폴리오 사이트 템플릿입니다.
 **고객 정보 수정은 단 하나의 파일(`src/config.js`)에서 99% 완결됩니다.**
 
@@ -184,7 +201,7 @@ export const COVER_LETTER = {
 ## 개발 서버 실행
 
 ```bash
-npm install
+npm ci --no-audit --no-fund
 npm run dev
 ```
 

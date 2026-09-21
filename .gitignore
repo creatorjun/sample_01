@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local configuration, credentials, and generated upload packages
+.env
+.env.*
+.npmrc
+.secrets/
+.credentials/
+artifacts/
+*.pem
+*.key
+id_rsa
+id_ed25519
