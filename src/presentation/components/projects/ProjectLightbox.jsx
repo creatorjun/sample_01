@@ -18,7 +18,7 @@ export default function ProjectLightbox({ project, onClose }) {
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
-      style={{ backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)' }}
+      style={{ backgroundColor: 'var(--color-modal-overlay)', backdropFilter: 'blur(8px)' }}
       onClick={onClose}
     >
       <div
@@ -26,7 +26,7 @@ export default function ProjectLightbox({ project, onClose }) {
         style={{
           backgroundColor: 'var(--color-surface)',
           border: '1px solid var(--color-border)',
-          boxShadow: '0 24px 64px rgba(0,0,0,0.3)',
+          boxShadow: 'var(--shadow-modal)',
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -63,7 +63,7 @@ export default function ProjectLightbox({ project, onClose }) {
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
                       d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  <span style="font-size:11px;font-family:monospace;opacity:0.3">${project.image}</span>
+                  <span class="type-caption type-mono" style="color:var(--color-text-muted)">${project.image}</span>
                 `
                 e.target.parentNode.appendChild(ph)
               }}
@@ -84,7 +84,7 @@ export default function ProjectLightbox({ project, onClose }) {
           )}
           {project.metric && (
             <div
-              className="absolute top-3 left-3 rounded-md px-2.5 py-0.5 text-xs font-mono"
+              className="absolute top-3 left-3 rounded-md px-2.5 py-0.5 type-caption type-mono"
               style={{
                 backgroundColor: 'var(--color-primary-hl)',
                 color: 'var(--color-primary)',
@@ -97,14 +97,14 @@ export default function ProjectLightbox({ project, onClose }) {
 
         <div className="flex min-h-0 flex-1 flex-col p-6">
           <p
-            className="mb-1.5 text-xs font-medium"
+            className="mb-1.5 type-caption type-label"
             style={{ color: 'var(--color-primary)' }}
           >
             {project.tag}
           </p>
           <h3
-            className="mb-3 text-lg font-semibold"
-            style={{ fontFamily: 'var(--font-display)', color: 'var(--color-text)' }}
+            className="mb-3 type-title"
+            style={{ color: 'var(--color-text)' }}
           >
             {project.name}
           </h3>
@@ -114,7 +114,7 @@ export default function ProjectLightbox({ project, onClose }) {
             style={{ maxHeight: 'clamp(6rem, 20vh, 14rem)', scrollbarWidth: 'thin' }}
           >
             <p
-              className="whitespace-pre-line text-sm leading-relaxed"
+              className="whitespace-pre-line type-body"
               style={{ color: 'var(--color-text-muted)' }}
             >
               {project.desc}
@@ -122,13 +122,13 @@ export default function ProjectLightbox({ project, onClose }) {
           </div>
 
           {(project.github || project.demo) && (
-            <div className="mt-5 flex shrink-0 gap-4 border-t pt-5" style={{ borderColor: 'var(--color-divider)' }}>
+            <div className="mt-5 flex flex-wrap shrink-0 gap-4 border-t pt-5" style={{ borderColor: 'var(--color-divider)' }}>
               {project.github && (
                 <a
                   href={project.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-sm transition-colors"
+                  className="inline-flex items-center gap-2 type-control transition-colors"
                   style={{ color: 'var(--color-text-muted)' }}
                 >
                   <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
@@ -142,7 +142,7 @@ export default function ProjectLightbox({ project, onClose }) {
                   href={project.demo}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-sm transition-colors"
+                  className="inline-flex items-center gap-2 type-control transition-colors"
                   style={{ color: 'var(--color-text-muted)' }}
                 >
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -156,7 +156,7 @@ export default function ProjectLightbox({ project, onClose }) {
         </div>
       </div>
 
-      <p className="absolute bottom-3 select-none text-xs" style={{ color: 'rgba(255,255,255,0.25)' }}>
+      <p className="absolute bottom-3 select-none type-caption" style={{ color: 'var(--color-overlay-text)' }}>
         ESC 또는 바깥 영역 클릭으로 닫기
       </p>
     </div>

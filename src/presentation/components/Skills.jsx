@@ -17,12 +17,12 @@ export default function Skills() {
           ref={ref}
           className={`transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
-          <p className="text-xs uppercase tracking-widest mb-3 font-medium" style={{ color: 'var(--color-primary)' }}>
+          <p className="type-eyebrow mb-3" style={{ color: 'var(--color-primary)' }}>
             Skills
           </p>
           <h2
-            className="mb-12"
-            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem, 3vw, 3rem)', color: 'var(--color-text)' }}
+            className="type-section mb-12"
+            style={{ color: 'var(--color-text)' }}
           >
             기술 스택
           </h2>
@@ -30,17 +30,17 @@ export default function Skills() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {skills.map(g => (
               <div key={g.label}>
-                <p
-                  className="text-xs uppercase tracking-widest mb-3 font-medium"
-                  style={{ color: 'var(--color-text-faint)' }}
+                <h3
+                  className="type-title mb-3"
+                  style={{ color: 'var(--color-text)' }}
                 >
                   {g.label}
-                </p>
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {g.items.map(item => (
                     <span
                       key={item}
-                      className="px-3 py-1 text-xs rounded-md border transition-colors"
+                      className="px-3 py-1 type-caption rounded-md border transition-colors"
                       style={{
                         color: 'var(--color-text-muted)',
                         borderColor: 'var(--color-border)',

@@ -17,16 +17,16 @@ export default function CoverLetter() {
           ref={ref}
           className={`transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
-          <p className="text-xs uppercase tracking-widest mb-3 font-medium" style={{ color: 'var(--color-primary)' }}>
+          <p className="type-eyebrow mb-3" style={{ color: 'var(--color-primary)' }}>
             Cover Letter
           </p>
           <h2
-            className="mb-2"
-            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem, 3vw, 3rem)', color: 'var(--color-text)' }}
+            className="type-section mb-2"
+            style={{ color: 'var(--color-text)' }}
           >
             자기소개서
           </h2>
-          <p className="text-xs mb-12 font-mono" style={{ color: 'var(--color-text-muted)' }}>
+          <p className="type-supporting mb-12" style={{ color: 'var(--color-text-muted)' }}>
             {profile.nameKo} · {profile.title}
           </p>
 
@@ -42,7 +42,7 @@ export default function CoverLetter() {
               >
                 <div className="flex items-start gap-4">
                   <div
-                    className="flex-shrink-0 w-7 h-7 rounded-md flex items-center justify-center text-xs font-mono font-semibold"
+                    className="flex-shrink-0 w-7 h-7 rounded-md flex items-center justify-center type-caption type-mono type-label"
                     style={{
                       backgroundColor: 'var(--color-primary-hl)',
                       color: 'var(--color-primary)',
@@ -50,15 +50,15 @@ export default function CoverLetter() {
                   >
                     {String(i + 1).padStart(2, '0')}
                   </div>
-                  <div className="space-y-2">
+                  <div className="min-w-0 space-y-2">
                     <h3
-                      className="text-sm font-semibold"
+                      className="type-title"
                       style={{ color: 'var(--color-text)' }}
                     >
                       {section.title}
                     </h3>
                     <p
-                      className="text-sm leading-relaxed"
+                      className="type-body"
                       style={{ color: 'var(--color-text-muted)' }}
                     >
                       {section.body}

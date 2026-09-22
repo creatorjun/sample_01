@@ -20,6 +20,8 @@ npm run dev
 React + Vite + Tailwind CSS 기반의 개발자 포트폴리오 사이트 템플릿입니다.
 **고객 정보 수정은 단 하나의 파일(`src/config.js`)에서 99% 완결됩니다.**
 
+색상 팔레트·폰트 크기·굵기·행간·자간은 [`src/design-tokens.css`](src/design-tokens.css), 공통 텍스트 계층은 [`src/typography.css`](src/typography.css)에서 관리합니다. [디자인 가이드](docs/design-system.md)에 Light/Dark 팔레트와 제목·본문·보조문 적용 기준이 정리되어 있습니다.
+
 ---
 
 ## 프로젝트 구조
@@ -34,7 +36,9 @@ Template_01/
 └── src/
     ├── main.jsx                        # React 루트 마운트
     ├── App.jsx                         # 전체 섹션 조합 컴포넌트
-    ├── index.css                       # 전역 스타일 (폰트, 스크롤바 등)
+    ├── design-tokens.css               # 색상·폰트·크기·굵기·행간·자간 기준
+    ├── typography.css                  # 제목·본문·보조문·버튼 역할 스타일
+    ├── index.css                       # 전역 배경·포커스·모션 스타일
     ├── config.js                       # ★ 고객 정보 수정 파일 (핵심)
     ├── presentation/
     │   ├── components/
@@ -222,8 +226,9 @@ npm run build
 | 상황 | 수정 파일 |
 |------|-----------|
 | 내비게이션 메뉴 항목 추가/삭제 | `src/presentation/components/Navbar.jsx` |
-| 사이트 전체 색상 테마 변경 | `tailwind.config.js` + `src/index.css` |
-| 폰트 변경 | `src/index.css` + `index.html` (Google Fonts link) |
+| 사이트 전체 색상 테마 변경 | `src/design-tokens.css` |
+| 폰트 변경 | `src/design-tokens.css` + `index.html` (외부 폰트 link) |
+| 글자 크기·굵기·행간·자간 변경 | `src/design-tokens.css`, 역할 매핑은 `src/typography.css` |
 | 섹션 순서 변경 | `src/App.jsx` |
 | 새로운 섹션 추가 | `src/presentation/components/` 에 신규 컴포넌트 추가 후 `src/App.jsx` 에 import |
 | OG 태그 / 파비콘 변경 | `index.html` |

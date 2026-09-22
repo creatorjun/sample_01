@@ -1,0 +1,74 @@
+/* Shared roles: component classes should describe layout, not a new type scale. */
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+}
+
+button, input, textarea, select { font: inherit; letter-spacing: inherit; }
+input, textarea, select { font-size: var(--text-body); }
+
+:where(h1, h2, h3, h4, p, li, a, button, span) {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+h1, h2, h3, h4 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+
+.type-hero, .type-section, .type-brand, .type-metric, .type-metric-compact {
+  font-family: var(--font-display);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-heading);
+}
+
+.type-hero { font-size: var(--text-hero); line-height: var(--leading-hero); }
+.type-section { font-size: var(--text-section); line-height: var(--leading-heading); }
+.type-brand { font-size: var(--text-brand); line-height: var(--leading-heading); }
+.type-metric { font-size: var(--text-metric); line-height: var(--leading-heading); }
+.type-metric-compact { font-size: var(--text-metric-compact); line-height: var(--leading-heading); }
+
+.type-title {
+  font-family: var(--font-body);
+  font-size: var(--text-title);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-title);
+  letter-spacing: var(--tracking-heading);
+}
+
+.type-lead {
+  font-size: var(--text-lead);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-title);
+}
+
+.type-body { font-size: var(--text-body); line-height: var(--leading-body); }
+.type-supporting { font-size: var(--text-supporting); line-height: var(--leading-supporting); }
+.type-caption { font-size: var(--text-caption); line-height: var(--leading-supporting); }
+
+.type-eyebrow {
+  font-size: var(--text-eyebrow);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-supporting);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.type-control {
+  font-size: var(--text-control);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-control);
+  letter-spacing: var(--tracking-normal);
+}
+
+.type-label { font-weight: var(--weight-medium); }
+.type-mono { font-family: var(--font-mono); letter-spacing: var(--tracking-normal); }
+.text-on-primary { color: var(--color-on-primary); }
+.text-on-overlay { color: var(--color-overlay-text); }
+
+/* A fixed mobile header should not cover the section title after navigation. */
+@media (max-width: 767px) {
+  html { scroll-padding-top: 4.5rem; }
+}

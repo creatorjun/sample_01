@@ -25,7 +25,7 @@ export default function App() {
     <PortfolioProvider>
       <div className="flex min-h-screen" style={{ backgroundColor: 'var(--color-bg)', color: 'var(--color-text)' }}>
         <Navbar theme={theme} toggleTheme={toggleTheme} />
-        <main className="flex-1 md:ml-[240px]">
+        <main className="min-w-0 flex-1 md:ml-[var(--sidebar-width)]">
           <Hero />
           <About />
           <Career />

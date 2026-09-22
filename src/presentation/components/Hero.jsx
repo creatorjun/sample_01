@@ -14,13 +14,13 @@ export default function Hero() {
     >
       <div
         ref={ref}
-        className={`w-full max-w-5xl mx-auto px-6 md:px-12 py-20 md:py-28 grid md:grid-cols-[1fr_auto] gap-12 md:gap-16 items-center transition-all duration-700 ${
+        className={`w-full max-w-5xl mx-auto px-6 md:px-12 py-20 md:py-28 grid lg:grid-cols-[1fr_auto] gap-12 md:gap-16 items-center transition-all duration-700 ${
           inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
         }`}
       >
-        <div>
+        <div className="min-w-0">
           <div
-            className="inline-flex items-center gap-2 text-xs px-3 py-1.5 rounded-full border mb-8"
+            className="inline-flex items-center gap-2 type-caption px-3 py-1.5 rounded-full border mb-8"
             style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
           >
             <span
@@ -31,10 +31,8 @@ export default function Hero() {
           </div>
 
           <h1
-            className="mb-4 leading-none"
+            className="type-hero mb-4"
             style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(3rem, 6vw, 5.5rem)',
               color: 'var(--color-text)',
             }}
           >
@@ -42,14 +40,14 @@ export default function Hero() {
           </h1>
 
           <p
-            className="text-lg md:text-xl mb-3 font-medium"
-            style={{ color: 'var(--color-primary)', fontFamily: 'var(--font-body)' }}
+            className="type-lead mb-3"
+            style={{ color: 'var(--color-primary)' }}
           >
             {profile.title}
           </p>
 
           <p
-            className="text-sm leading-relaxed mb-10 max-w-md"
+            className="type-body mb-10 max-w-md"
             style={{ color: 'var(--color-text-muted)' }}
           >
             {profile.subtitle}<br />
@@ -61,10 +59,10 @@ export default function Hero() {
               href={profile.github}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md text-sm font-medium transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md type-control transition-colors"
               style={{
                 backgroundColor: 'var(--color-primary)',
-                color: '#ffffff',
+                color: 'var(--color-on-primary)',
               }}
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -74,7 +72,7 @@ export default function Hero() {
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md text-sm font-medium border transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md type-control border transition-colors"
               style={{
                 borderColor: 'var(--color-border)',
                 color: 'var(--color-text-muted)',
@@ -86,22 +84,22 @@ export default function Hero() {
         </div>
 
         <div
-          className="hidden md:flex flex-col items-start gap-3 p-6 rounded-xl border min-w-[200px]"
+          className="hidden lg:flex flex-col items-start gap-3 p-6 rounded-xl border min-w-[200px]"
           style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
         >
           <div
-            className="w-14 h-14 rounded-full flex items-center justify-center text-xl font-semibold mb-2"
-            style={{ backgroundColor: 'var(--color-primary-hl)', color: 'var(--color-primary)', fontFamily: 'var(--font-display)' }}
+            className="w-14 h-14 rounded-full flex items-center justify-center type-brand mb-2"
+            style={{ backgroundColor: 'var(--color-primary-hl)', color: 'var(--color-primary)' }}
           >
             {profile.nameKo?.[0] ?? 'P'}
           </div>
-          <p className="text-sm font-semibold" style={{ color: 'var(--color-text)' }}>{profile.nameKo}</p>
-          <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{profile.title}</p>
+          <p className="type-supporting type-label" style={{ color: 'var(--color-text)' }}>{profile.nameKo}</p>
+          <p className="type-caption" style={{ color: 'var(--color-text-muted)' }}>{profile.title}</p>
           <div className="w-full h-px my-1" style={{ backgroundColor: 'var(--color-divider)' }} />
           {profile.stats?.slice(0, 3).map(s => (
             <div key={s.label}>
-              <p className="text-base font-bold" style={{ color: 'var(--color-text)', fontFamily: 'var(--font-display)' }}>{s.value}</p>
-              <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>{s.label}</p>
+              <p className="type-metric-compact" style={{ color: 'var(--color-text)' }}>{s.value}</p>
+              <p className="type-caption" style={{ color: 'var(--color-text-faint)' }}>{s.label}</p>
             </div>
           ))}
         </div>

@@ -24,12 +24,12 @@ export default function Projects() {
           ref={ref}
           className={`transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
-          <p className="text-xs uppercase tracking-widest mb-3 font-medium" style={{ color: 'var(--color-primary)' }}>
+          <p className="type-eyebrow mb-3" style={{ color: 'var(--color-primary)' }}>
             Projects
           </p>
           <h2
-            className="mb-12"
-            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem, 3vw, 3rem)', color: 'var(--color-text)' }}
+            className="type-section mb-12"
+            style={{ color: 'var(--color-text)' }}
           >
             프로젝트
           </h2>

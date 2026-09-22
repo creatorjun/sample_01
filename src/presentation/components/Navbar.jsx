@@ -20,7 +20,7 @@ export default function Navbar({ theme, toggleTheme }) {
       <aside
         className="hidden md:flex fixed top-0 left-0 h-full flex-col z-40 border-r"
         style={{
-          width: '240px',
+          width: 'var(--sidebar-width)',
           backgroundColor: 'var(--color-surface)',
           borderColor: 'var(--color-border)',
         }}
@@ -28,12 +28,12 @@ export default function Navbar({ theme, toggleTheme }) {
         <div className="px-6 pt-10 pb-8 border-b" style={{ borderColor: 'var(--color-divider)' }}>
           <a
             href="#"
-            className="block font-semibold tracking-tight"
-            style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', color: 'var(--color-text)' }}
+            className="block type-brand"
+            style={{ color: 'var(--color-text)' }}
           >
             홍길동
           </a>
-          <p className="mt-1 text-xs" style={{ color: 'var(--color-text-muted)' }}>Portfolio</p>
+          <p className="mt-1 type-caption" style={{ color: 'var(--color-text-muted)' }}>Portfolio</p>
         </div>
 
         <nav className="flex-1 px-4 py-6 flex flex-col gap-1">
@@ -41,11 +41,11 @@ export default function Navbar({ theme, toggleTheme }) {
             <a
               key={id}
               href={`#${id}`}
-              className="px-3 py-2 rounded-md text-sm transition-colors"
+              className="px-3 py-2 rounded-md type-control transition-colors"
               style={{
                 color: active === id ? 'var(--color-primary)' : 'var(--color-text-muted)',
                 backgroundColor: active === id ? 'var(--color-primary-hl)' : 'transparent',
-                fontWeight: active === id ? 500 : 400,
+                fontWeight: active === id ? 'var(--weight-bold)' : 'var(--weight-medium)',
               }}
             >
               {label}
@@ -57,7 +57,7 @@ export default function Navbar({ theme, toggleTheme }) {
           <button
             onClick={toggleTheme}
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-            className="flex items-center gap-2 text-xs w-full px-3 py-2 rounded-md transition-colors"
+            className="flex items-center gap-2 type-control w-full px-3 py-2 rounded-md transition-colors"
             style={{ color: 'var(--color-text-muted)' }}
           >
             {theme === 'dark' ? (
@@ -79,7 +79,7 @@ export default function Navbar({ theme, toggleTheme }) {
         className="md:hidden fixed top-0 inset-x-0 z-50 h-14 flex items-center justify-between px-5 border-b"
         style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
       >
-        <a href="#" className="text-sm font-semibold" style={{ fontFamily: 'var(--font-display)', color: 'var(--color-text)' }}>
+        <a href="#" className="type-brand" style={{ color: 'var(--color-text)' }}>
           홍길동
         </a>
         <div className="flex items-center gap-3">
@@ -114,7 +114,7 @@ export default function Navbar({ theme, toggleTheme }) {
             <a
               key={id}
               href={`#${id}`}
-              className="px-3 py-2 rounded-md text-sm"
+              className="px-3 py-2 rounded-md type-control"
               style={{ color: 'var(--color-text-muted)' }}
               onClick={() => setOpen(false)}
             >
