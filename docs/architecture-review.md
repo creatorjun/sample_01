@@ -1,5 +1,7 @@
 # Sample 01 클린 아키텍처 검토
 
+현재 소스의 조립 위치는 [`src/portfolioService.js`](../src/portfolioService.js), 구체 저장소는 `src/infrastructure/repositories/`입니다. 아래의 이동 전 경로·행 번호와 산출물 개수는 당시 검토 기록입니다. 이후 추가된 아이콘과 현재 운영 릴리스는 [아이콘 가이드](icons.md)와 [실행·배포 문서](operations.md)에서 확인합니다.
+
 - 검토 기준 커밋: `7778182ac5adce02defe87f24b63d7df3d64142d` (`7778182`, 이미지·접근 가능한 프로젝트 상세 적용 상태)
 - 검토일: 2026-09-22
 - 범위: 기준 커밋의 Git 추적 파일 67개를 분류하고, first-party 소스·설정 57개 전체 내용을 읽었습니다.
