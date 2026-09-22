@@ -1,6 +1,6 @@
 // src/presentation/contexts/PortfolioContext.jsx
 import { createContext, useContext, useMemo } from 'react'
-import { portfolioService } from '../../application/services/PortfolioService'
+import { portfolioService } from '../../portfolioService'
 
 const PortfolioContext = createContext(null)
 

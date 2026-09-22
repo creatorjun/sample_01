@@ -1,6 +1,6 @@
-// src/application/repositories/ProfileRepository.js
+// src/infrastructure/repositories/ProfileRepository.js
 import { IProfileRepository } from '../../domain/repositories/IProfileRepository'
-import { profileData } from '../../infrastructure/data/profileData'
+import { profileData } from '../data/profileData'
 
 export class ProfileRepository extends IProfileRepository {
   getProfile() {

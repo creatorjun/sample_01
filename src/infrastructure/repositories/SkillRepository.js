@@ -1,6 +1,6 @@
-// src/application/repositories/SkillRepository.js
+// src/infrastructure/repositories/SkillRepository.js
 import { ISkillRepository } from '../../domain/repositories/ISkillRepository'
-import { skillsData } from '../../infrastructure/data/skillsData'
+import { skillsData } from '../data/skillsData'
 
 export class SkillRepository extends ISkillRepository {
   getAll() {

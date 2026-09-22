@@ -1,6 +1,6 @@
-// src/application/repositories/ProjectRepository.js
+// src/infrastructure/repositories/ProjectRepository.js
 import { IProjectRepository } from '../../domain/repositories/IProjectRepository'
-import { projectsData } from '../../infrastructure/data/projectsData'
+import { projectsData } from '../data/projectsData'
 
 export class ProjectRepository extends IProjectRepository {
   getAll() {

@@ -1,6 +1,6 @@
-// src/application/repositories/CoverLetterRepository.js
+// src/infrastructure/repositories/CoverLetterRepository.js
 import { ICoverLetterRepository } from '../../domain/repositories/ICoverLetterRepository'
-import { coverLetterData } from '../../infrastructure/data/coverLetterData'
+import { coverLetterData } from '../data/coverLetterData'
 
 export class CoverLetterRepository extends ICoverLetterRepository {
   get() {
