@@ -1,126 +1,102 @@
-// src/presentation/components/projects/ProjectLightbox.jsx
-import { useEffect, useCallback } from 'react'
+import { useEffect, useId, useRef } from 'react'
+import ProjectImage from './ProjectImage'
 
 export default function ProjectLightbox({ project, onClose }) {
-  const handleKeyDown = useCallback((e) => {
-    if (e.key === 'Escape') onClose()
-  }, [onClose])
+  const dialogRef = useRef(null)
+  const titleId = useId()
+  const descriptionId = useId()
 
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown)
+    const dialog = dialogRef.current
+    const previousFocus = document.activeElement
+    const previousOverflow = document.body.style.overflow
+    dialog.showModal()
     document.body.style.overflow = 'hidden'
+
     return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = ''
+      dialog.close()
+      document.body.style.overflow = previousOverflow
+      if (previousFocus instanceof HTMLElement && previousFocus.isConnected) {
+        previousFocus.focus({ preventScroll: true })
+      }
     }
-  }, [handleKeyDown])
+  }, [])
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
-      style={{ backgroundColor: 'var(--color-modal-overlay)', backdropFilter: 'blur(8px)' }}
-      onClick={onClose}
+    <dialog
+      ref={dialogRef}
+      className="project-dialog"
+      aria-labelledby={titleId}
+      aria-describedby={descriptionId}
+      onCancel={(event) => {
+        event.preventDefault()
+        onClose()
+      }}
+      onClick={(event) => {
+        if (event.target !== event.currentTarget) return
+        const bounds = event.currentTarget.getBoundingClientRect()
+        const outside = event.clientX < bounds.left || event.clientX > bounds.right
+          || event.clientY < bounds.top || event.clientY > bounds.bottom
+        if (outside) onClose()
+      }}
     >
-      <div
-        className="relative flex w-full max-w-2xl max-h-[90vh] flex-col rounded-xl overflow-hidden"
-        style={{
-          backgroundColor: 'var(--color-surface)',
-          border: '1px solid var(--color-border)',
-          boxShadow: 'var(--shadow-modal)',
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 z-10 flex h-7 w-7 items-center justify-center rounded-md border transition-colors"
-          style={{
-            borderColor: 'var(--color-border)',
-            backgroundColor: 'var(--color-bg)',
-            color: 'var(--color-text-muted)',
-          }}
-          aria-label="닫기"
+      <div className="project-dialog-panel">
+        <header
+          className="sticky top-0 z-20 flex min-w-0 items-start justify-between gap-4 border-b px-5 py-4 sm:px-6"
+          style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
         >
-          <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-
-        <div
-          className="relative aspect-video overflow-hidden flex-shrink-0"
-          style={{ backgroundColor: 'var(--color-surface-offset)' }}
-        >
-          {project.image ? (
-            <img
-              src={`/images/${project.image}`}
-              alt={project.name}
-              className="h-full w-full object-cover"
-              onError={(e) => {
-                e.target.style.display = 'none'
-                const ph = document.createElement('div')
-                ph.style.cssText = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;'
-                ph.innerHTML = `
-                  <svg width="44" height="44" fill="none" stroke="currentColor" style="opacity:0.2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
-                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  <span class="type-caption type-mono" style="color:var(--color-text-muted)">${project.image}</span>
-                `
-                e.target.parentNode.appendChild(ph)
-              }}
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <svg
-                className="w-12 h-12"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                style={{ color: 'var(--color-text-faint)' }}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1}
-                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-            </div>
-          )}
-          {project.metric && (
-            <div
-              className="absolute top-3 left-3 rounded-md px-2.5 py-0.5 type-caption type-mono"
-              style={{
-                backgroundColor: 'var(--color-primary-hl)',
-                color: 'var(--color-primary)',
-              }}
-            >
-              {project.metric}
-            </div>
-          )}
-        </div>
-
-        <div className="flex min-h-0 flex-1 flex-col p-6">
-          <p
-            className="mb-1.5 type-caption type-label"
-            style={{ color: 'var(--color-primary)' }}
-          >
-            {project.tag}
-          </p>
-          <h3
-            className="mb-3 type-title"
-            style={{ color: 'var(--color-text)' }}
-          >
-            {project.name}
-          </h3>
-
-          <div
-            className="min-h-0 flex-1 overflow-y-auto"
-            style={{ maxHeight: 'clamp(6rem, 20vh, 14rem)', scrollbarWidth: 'thin' }}
-          >
-            <p
-              className="whitespace-pre-line type-body"
-              style={{ color: 'var(--color-text-muted)' }}
-            >
-              {project.desc}
+          <div className="min-w-0">
+            <p className="mb-1.5 type-caption type-label" style={{ color: 'var(--color-primary)' }}>
+              {project.tag}
             </p>
+            <h2 id={titleId} className="type-title" style={{ color: 'var(--color-text)' }}>
+              {project.name}
+            </h2>
           </div>
+          <button
+            type="button"
+            onClick={onClose}
+            autoFocus
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border transition-colors"
+            style={{
+              borderColor: 'var(--color-border)',
+              backgroundColor: 'var(--color-bg)',
+              color: 'var(--color-text-muted)',
+            }}
+            aria-label="프로젝트 상세 닫기"
+          >
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </header>
 
+        <figure>
+          <div
+            className="relative aspect-video overflow-hidden"
+            style={{ backgroundColor: 'var(--color-surface-offset)' }}
+          >
+            <ProjectImage project={project} className="object-contain" />
+            {project.metric && (
+              <div
+                className="absolute left-3 top-3 max-w-[calc(100%-1.5rem)] rounded-md px-2.5 py-0.5 type-caption type-mono"
+                style={{ backgroundColor: 'var(--color-primary-hl)', color: 'var(--color-primary)' }}
+              >
+                {project.metric}
+              </div>
+            )}
+          </div>
+          {project.imageCaption && (
+            <figcaption className="px-5 pt-3 type-caption sm:px-6" style={{ color: 'var(--color-text-muted)' }}>
+              {project.imageCaption}
+            </figcaption>
+          )}
+        </figure>
+
+        <div className="min-w-0 p-5 sm:p-6">
+          <p id={descriptionId} className="whitespace-pre-line type-body" style={{ color: 'var(--color-text-muted)' }}>
+            {project.desc}
+          </p>
           {(project.github || project.demo) && (
             <div className="mt-5 flex flex-wrap shrink-0 gap-4 border-t pt-5" style={{ borderColor: 'var(--color-divider)' }}>
               {project.github && (
@@ -153,12 +129,11 @@ export default function ProjectLightbox({ project, onClose }) {
               )}
             </div>
           )}
+          <p className="mt-5 type-caption" style={{ color: 'var(--color-text-muted)' }}>
+            ESC 또는 바깥 영역 클릭으로 닫기
+          </p>
         </div>
       </div>
-
-      <p className="absolute bottom-3 select-none type-caption" style={{ color: 'var(--color-overlay-text)' }}>
-        ESC 또는 바깥 영역 클릭으로 닫기
-      </p>
-    </div>
+    </dialog>
   )
 }

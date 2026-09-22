@@ -1,54 +1,29 @@
-// src/presentation/components/projects/ProjectCard.jsx
+import { useId } from 'react'
+import ProjectImage from './ProjectImage'
+
 export default function ProjectCard({ project, onCardClick }) {
+  const titleId = useId()
+  const actionId = useId()
+
   return (
-    <div
-      className="group flex cursor-pointer flex-col overflow-hidden rounded-lg border transition-all duration-200 hover:shadow-md"
+    <article
+      className="group relative flex min-w-0 flex-col overflow-hidden rounded-lg border transition-all duration-200 hover:shadow-md focus-within:shadow-md"
       style={{
         backgroundColor: 'var(--color-surface)',
         borderColor: 'var(--color-border)',
       }}
-      onClick={() => onCardClick(project)}
     >
       <div
         className="relative aspect-video overflow-hidden"
         style={{ backgroundColor: 'var(--color-surface-offset)' }}
       >
-        {project.image ? (
-          <img
-            src={`/images/${project.image}`}
-            alt={project.name}
-            className="h-full w-full object-cover opacity-90 transition-all duration-500 group-hover:scale-105 group-hover:opacity-100"
-            onError={(e) => {
-              e.target.style.display = 'none'
-              const ph = document.createElement('div')
-              ph.className = 'absolute inset-0 flex flex-col items-center justify-center gap-2'
-              ph.innerHTML = `
-                <svg width="36" height="36" fill="none" stroke="currentColor" style="opacity:0.2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
-                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span class="type-caption type-mono" style="color:var(--color-text-muted)">${project.image}</span>
-              `
-              e.target.parentNode.appendChild(ph)
-            }}
-          />
-        ) : (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-            <svg
-              className="w-9 h-9"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              style={{ color: 'var(--color-text-faint)' }}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1}
-                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </div>
-        )}
+        <ProjectImage
+          project={project}
+          className="object-cover transition-transform duration-500 group-hover:scale-105 group-focus-within:scale-105"
+        />
         {project.metric && (
           <div
-            className="absolute top-2.5 left-2.5 rounded-md px-2 py-0.5 type-caption type-mono"
+            className="absolute left-2.5 top-2.5 max-w-[calc(100%-1.25rem)] rounded-md px-2 py-0.5 type-caption type-mono"
             style={{
               backgroundColor: 'var(--color-primary-hl)',
               color: 'var(--color-primary)',
@@ -58,8 +33,9 @@ export default function ProjectCard({ project, onCardClick }) {
           </div>
         )}
         <div
-          className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+          className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-within:opacity-100"
           style={{ backgroundColor: 'var(--color-card-overlay)' }}
+          aria-hidden="true"
         >
           <div
             className="rounded-full p-2"
@@ -72,20 +48,29 @@ export default function ProjectCard({ project, onCardClick }) {
         </div>
       </div>
 
-      <div className="px-4 py-3">
-        <p
-          className="mb-1 type-caption type-label"
-          style={{ color: 'var(--color-primary)' }}
-        >
+      <div className="min-w-0 px-4 py-3">
+        <p className="mb-1 type-caption type-label" style={{ color: 'var(--color-primary)' }}>
           {project.tag}
         </p>
-        <h3
-          className="type-title"
-          style={{ color: 'var(--color-text)' }}
-        >
+        <h3 id={titleId} className="type-title" style={{ color: 'var(--color-text)' }}>
           {project.name}
         </h3>
+        {project.imageCaption && (
+          <p className="mt-2 type-caption" style={{ color: 'var(--color-text-muted)' }}>
+            {project.imageCaption}
+          </p>
+        )}
       </div>
-    </div>
+
+      <button
+        type="button"
+        className="absolute inset-0 z-10 cursor-pointer rounded-lg focus-visible:outline-offset-[-3px]"
+        aria-labelledby={`${titleId} ${actionId}`}
+        aria-haspopup="dialog"
+        onClick={() => onCardClick(project)}
+      >
+        <span id={actionId} className="sr-only">프로젝트 자세히 보기</span>
+      </button>
+    </article>
   )
 }

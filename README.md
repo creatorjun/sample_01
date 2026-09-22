@@ -154,7 +154,9 @@ export const PROJECTS = [
     name:   '프로젝트명',
     tag:    '기술 스택 태그',       // 프로젝트 카드 상단 회색 태그
     desc:   '프로젝트 설명 텍스트',
-    image:  null,                  // 프로젝트 썸네일 이미지 URL (없으면 null)
+    image:  'projects/project.webp', // public/images/ 기준 상대 경로 (없으면 null)
+    imageAlt: '이미지 내용을 설명하는 문장', // 이미지 대체 텍스트
+    imageCaption: 'AI 생성 예시 이미지', // 카드와 상세 화면에 표시할 안내
     github: 'https://github.com/...', // GitHub 링크 (없으면 null)
     demo:   'https://...',         // 데모/배포 URL (없으면 null)
     metric: null,                  // 핵심 지표 문자열 (예: 'DAU 1만', 없으면 null)
@@ -162,7 +164,9 @@ export const PROJECTS = [
 ]
 ```
 
-- `image`: 외부 이미지 URL 또는 `public/` 디렉토리 내 이미지 경로(`/images/project.png`).
+- `image`: `public/images/` 기준 상대 경로입니다. 예를 들어 `public/images/projects/project.webp`는 `projects/project.webp`로 설정합니다. 화면에서 `/images/`를 붙이므로 `/images/` 접두사나 외부 URL을 넣지 않습니다.
+- `imageAlt`: 이미지의 내용을 설명하는 대체 텍스트입니다. 이미지 교체 시 함께 수정합니다.
+- `imageCaption`: 카드·상세 화면에 표시할 출처나 예시 이미지 안내입니다. 기본 6개는 `AI 생성 예시 이미지`로 표시합니다. 생성 이미지의 주제와 교체 방법은 [프로젝트 이미지 가이드](docs/project-images.md)를 참고하세요.
 - `github` / `demo` 중 하나만 있어도 됩니다. `null`이면 해당 버튼이 렌더링되지 않습니다.
 - `metric`: 프로젝트 카드에 강조 지표를 표시할 때 사용. 예: `'Star 120+'`, `'MAU 5,000'`.
 
@@ -238,7 +242,7 @@ npm run build
 ## 자주 묻는 질문
 
 **Q. 프로젝트 이미지를 넣으려면?**
-`public/images/` 디렉토리에 이미지를 추가한 뒤 `PROJECTS[n].image` 값을 `/images/파일명.png`로 설정합니다.
+`public/images/projects/`에 이미지를 추가하고 `PROJECTS[n].image`를 `projects/파일명.webp`로 설정합니다. `/images/` 접두사는 넣지 않습니다. `imageAlt`와 `imageCaption`도 실제 이미지에 맞게 수정하세요. 기본 6개 이미지는 프로젝트 주제를 설명하기 위한 AI 생성 예시이며 실제 프로젝트 화면이 아닙니다. [파일 목록과 교체 방법](docs/project-images.md)을 참고하세요.
 
 **Q. GitHub / 데모 링크 버튼을 숨기려면?**
 해당 `PROJECTS[n].github` 또는 `PROJECTS[n].demo` 값을 `null`로 설정합니다.

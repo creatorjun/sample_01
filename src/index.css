@@ -37,3 +37,27 @@ img, picture, video, canvas, svg { display: block; max-width: 100%; }
     scroll-behavior: auto !important;
   }
 }
+
+/* Native modal keeps keyboard focus inside and leaves the page beneath inert. */
+.project-dialog {
+  width: min(42rem, calc(100% - 2rem));
+  max-width: none;
+  max-height: min(90svh, 60rem);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-modal);
+  scrollbar-width: thin;
+}
+
+.project-dialog::backdrop {
+  background: var(--color-modal-overlay);
+  backdrop-filter: blur(8px);
+}
+
+.project-dialog-panel { min-width: 0; }
